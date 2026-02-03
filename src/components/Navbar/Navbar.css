@@ -1,0 +1,55 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: white;
+  border-bottom: 2px solid #1B1B1B;
+  z-index: 100;
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+  padding: 0 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.hamburger {
+  position: absolute;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 8px 8px 0px;
+  z-index: 10;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: #1B1B1B;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+.hamburger:hover span {
+  background-color: #F9E450;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1B1B1B;
+}
