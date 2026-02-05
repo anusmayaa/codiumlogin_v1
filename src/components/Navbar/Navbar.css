@@ -4,9 +4,11 @@
   left: 0;
   right: 0;
   height: 60px;
-  background-color: white;
-  border-bottom: 2px solid #1B1B1B;
+  /* Always Dark Background */
+  background-color: #1a1f35; 
+  border-bottom: 2px solid #2d3548;
   z-index: 100;
+  transition: all 0.3s ease;
 }
 
 .navbar-content {
@@ -20,6 +22,7 @@
   margin: 0 auto;
 }
 
+/* Hamburger - Always Light/Green on Hover */
 .hamburger {
   position: absolute;
   left: 0;
@@ -29,27 +32,57 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px 8px 8px 0px;
+  padding: 8px;
   z-index: 10;
 }
 
 .hamburger span {
   width: 25px;
   height: 3px;
-  background-color: #1B1B1B;
+  background-color: #e5e7eb; /* Light grey for contrast */
   border-radius: 2px;
   transition: 0.3s;
 }
 
 .hamburger:hover span {
-  background-color: #F9E450;
+  background-color: #34d399; /* Emerald/Green hover */
 }
 
+/* Logo - Always Light */
 .navbar-logo {
   display: flex;
   align-items: center;
   gap: 10px;
   font-size: 1.5rem;
   font-weight: 800;
-  color: #1B1B1B;
+  color: #e5e7eb;
+  transition: color 0.3s ease;
 }
+
+.navbar-logo svg {
+  color: #e5e7eb;
+}
+
+/* Theme Toggle - Always Light */
+.theme-toggle-btn {
+  position: absolute;
+  right: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  color: #e5e7eb;
+}
+
+.theme-toggle-btn:hover {
+  background-color: #0f1422; /* Darker hover effect */
+  transform: rotate(180deg);
+}
+
+/* Note: You can now delete the "body.dark .navbar" sections 
+   as they are now the default state! */

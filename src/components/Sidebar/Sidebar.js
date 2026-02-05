@@ -1,7 +1,7 @@
 import React from 'react';
 import './Sidebar.css';
 
-function Sidebar({ isOpen, closeSidebar, isLoggedIn, handleLogout }) {
+function Sidebar({ isOpen, closeSidebar, isLoggedIn, handleLogout, userData }) {
   return (
     <>
       {isOpen && <div className="overlay" onClick={closeSidebar}></div>}
@@ -25,12 +25,22 @@ function Sidebar({ isOpen, closeSidebar, isLoggedIn, handleLogout }) {
           <a href="#" className="sidebar-link">
             <span>🏆</span> Contest
           </a>
+          <a href="#" className="sidebar-link">
+            <span>📊</span> Leaderboard
+          </a>
           
-          
-          
+          {isLoggedIn && (
+            <>
+              <a href="#" className="sidebar-link">
+                <span>👤</span> Profile
+              </a>
+              <a href="#" className="sidebar-link">
+                <span>⚙️</span> Settings
+              </a>
+            </>
+          )}
         </nav>
 
-        {/* Only show logout button if logged in */}
         {isLoggedIn && (
           <div className="sidebar-footer">
             <button className="logout-btn" onClick={handleLogout}>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Signup.css';
 
 function Signup({ onSignup, onSwitchToLogin }) {
@@ -10,6 +10,9 @@ function Signup({ onSignup, onSwitchToLogin }) {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  
+
+  
 
   const handleChange = (e) => {
     setFormData({
@@ -60,7 +63,6 @@ function Signup({ onSignup, onSwitchToLogin }) {
         localStorage.setItem('userData', JSON.stringify(data.user));
         
         onSignup(data.user);
-        
         alert('Account created successfully!');
         
       } else {
@@ -68,7 +70,6 @@ function Signup({ onSignup, onSwitchToLogin }) {
       }
 
     } catch (error) {
-      // For testing without backend
       const newUser = {
         username: formData.username,
         email: formData.email
@@ -82,84 +83,107 @@ function Signup({ onSignup, onSwitchToLogin }) {
     }
   };
 
+  const handleLoginClick = (e) => {
+    e.preventDefault();
+    onSwitchToLogin();
+  };
+
   return (
-    <div className="signup-container">
-      <div className="signup-box">
-        <div className="logo">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-            <path d="M7 8L3 11.6923L7 16M17 8L21 11.6923L17 16M14 4L10 20" 
-                  stroke="#1B1B1B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          <h1>Codium</h1>
-        </div>
+    <>
+      
 
-        <p className="subtitle">Create your account</p>
+      <div className="signup-container">
+        <div className="signup-box">
+          <div className="logo">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+              <path 
+                d="M7 8L3 11.6923L7 16M17 8L21 11.6923L17 16M14 4L10 20" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              />
+            </svg>
+            <h1>Codium</h1>
+          </div>
 
-        <label>Username</label>
-        <input
-          type="text"
-          name="username"
-          placeholder="Choose a username"
-          value={formData.username}
-          onChange={handleChange}
-        />
+          <p className="subtitle">Create your account</p>
 
-        <label>Email</label>
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter your email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-
-        <label>Password</label>
-        <div className="password-box">
+          <label htmlFor="username">Username</label>
           <input
-            type={showPassword ? 'text' : 'password'}
-            name="password"
-            placeholder="Create a password (min 6 characters)"
-            value={formData.password}
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Choose a username"
+            value={formData.username}
             onChange={handleChange}
           />
-          <span 
-            className="toggle-btn" 
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? 'Hide' : 'Show'}
-          </span>
-        </div>
 
-        <label>Confirm Password</label>
-        <div className="password-box">
+          <label htmlFor="email">Email</label>
           <input
-            type={showConfirmPassword ? 'text' : 'password'}
-            name="confirmPassword"
-            placeholder="Re-enter your password"
-            value={formData.confirmPassword}
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            value={formData.email}
             onChange={handleChange}
           />
-          <span 
-            className="toggle-btn" 
-            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-          >
-            {showConfirmPassword ? 'Hide' : 'Show'}
-          </span>
+
+          <label htmlFor="password"> Create Password</label>
+          <div className="password-box">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              id="password"
+              name="password"
+              placeholder=" (min 6 characters)"
+              value={formData.password}
+              onChange={handleChange}
+            />
+            <span 
+              className="toggle-btn" 
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? 'Hide' : 'Show'}
+            </span>
+          </div>
+
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <div className="password-box">
+            <input
+              type={showConfirmPassword ? 'text' : 'password'}
+              id="confirmPassword"
+              name="confirmPassword"
+              placeholder="Re-enter your password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+            />
+            <span 
+              className="toggle-btn" 
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              {showConfirmPassword ? 'Hide' : 'Show'}
+            </span>
+          </div>
+
+          <button className="signup-btn" onClick={handleSignup}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path 
+                d="M16 21V19C16 17.9391 15.5786 16.9217 14.8284 16.1716C14.0783 15.4214 13.0609 15 12 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21M12.5 7C12.5 9.20914 10.7091 11 8.5 11C6.29086 11 4.5 9.20914 4.5 7C4.5 4.79086 6.29086 3 8.5 3C10.7091 3 12.5 4.79086 12.5 7ZM20 8V14M23 11H17" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span>Sign Up</span>
+          </button>
+
+          <p className="login-text">
+            Already have an account? <a href="#" onClick={handleLoginClick}>Login</a>
+          </p>
         </div>
-
-        <button className="signup-btn" onClick={handleSignup}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M16 21V19C16 17.9391 15.5786 16.9217 14.8284 16.1716C14.0783 15.4214 13.0609 15 12 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21M12.5 7C12.5 9.20914 10.7091 11 8.5 11C6.29086 11 4.5 9.20914 4.5 7C4.5 4.79086 6.29086 3 8.5 3C10.7091 3 12.5 4.79086 12.5 7ZM20 8V14M23 11H17" 
-                  stroke="#1B1B1B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          <span>Sign Up</span>
-        </button>
-
-        <p className="login-text">
-          Already have an account? <a href="#" onClick={onSwitchToLogin}>Login</a>
-        </p>
       </div>
-    </div>
+    </>
   );
 }
 
