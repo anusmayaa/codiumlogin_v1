@@ -9,7 +9,8 @@ import './App.css';
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentPage, setCurrentPage] = useState('login');  // ← Make sure this line exists!
+  // Default to home so logout doesn't force a login screen
+  const [currentPage, setCurrentPage] = useState('home');  
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
@@ -19,25 +20,23 @@ function App() {
     if (token && storedUserData) {
       setIsLoggedIn(true);
       setUserData(JSON.parse(storedUserData));
+      setCurrentPage('home'); // Ensure logged in users start at home
     }
   }, []);
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
-  const closeSidebar = () => {
-    setIsSidebarOpen(false);
-  };
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const closeSidebar = () => setIsSidebarOpen(false);
 
   const handleLogin = (user) => {
     setIsLoggedIn(true);
     setUserData(user);
+    setCurrentPage('home');
   };
 
   const handleSignup = (user) => {
     setIsLoggedIn(true);
     setUserData(user);
+    setCurrentPage('home');
   };
 
   const handleLogout = () => {
@@ -45,22 +44,26 @@ function App() {
     setUserData(null);
     localStorage.removeItem('authToken');
     localStorage.removeItem('userData');
-    setCurrentPage('login');
+    // Change: Go to home on logout, not login page
+    setCurrentPage('home'); 
     closeSidebar();
   };
 
-  // ← Make sure these two functions exist!
-  const switchToLogin = () => {
-    setCurrentPage('login');
-  };
-
-  const switchToSignup = () => {
-    setCurrentPage('signup');
-  };
+  const switchToLogin = () => setCurrentPage('login');
+  const switchToSignup = () => setCurrentPage('signup');
+  const switchToHome = () => setCurrentPage('home');
 
   return (
     <div className="App">
-      <Navbar toggleSidebar={toggleSidebar} />
+      <Navbar 
+        toggleSidebar={toggleSidebar} 
+        isLoggedIn={isLoggedIn}
+        userData={userData}
+        currentPage={currentPage} // Used by Navbar to hide buttons on auth pages
+        onLoginClick={switchToLogin}
+        onRegisterClick={switchToSignup}
+        onLogoClick={switchToHome}
+      />
       
       <Sidebar 
         isOpen={isSidebarOpen} 
@@ -71,20 +74,32 @@ function App() {
       />
       
       <div className={`main-content ${isSidebarOpen ? 'shifted' : ''}`}>
-        {!isLoggedIn ? (
-          currentPage === 'login' ? (
-            <Login 
-              onLogin={handleLogin} 
-              onSwitchToSignup={switchToSignup}
-            />
-          ) : (
-            <Signup 
-              onSignup={handleSignup} 
-              onSwitchToLogin={switchToLogin}
-            />
-          )
-        ) : (
-          <Home userData={userData} />
+        {/* Logic: Show Login/Signup only if not logged in AND current page matches */}
+        {!isLoggedIn && currentPage === 'login' && (
+          <Login 
+            onLogin={handleLogin} 
+            onSwitchToSignup={switchToSignup}
+          />
+        )}
+
+        {!isLoggedIn && currentPage === 'signup' && (
+          <Signup 
+            onSignup={handleSignup} 
+            onSwitchToLogin={switchToLogin}
+          />
+        )}
+
+        {/* Show Home if: 
+            1. User is logged in 
+            2. OR current page is 'home' 
+        */}
+        {(isLoggedIn || currentPage === 'home') && (
+          <Home 
+            userData={userData} 
+            isLoggedIn={isLoggedIn} 
+            onLoginPrompt={switchToLogin}
+            onRegisterPrompt={switchToSignup}
+          />
         )}
       </div>
     </div>

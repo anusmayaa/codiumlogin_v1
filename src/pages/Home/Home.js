@@ -1,28 +1,109 @@
 import React from 'react';
 import './Home.css';
 
-function Home({ userData }) {
+function Home({ userData, isLoggedIn, onLoginPrompt }) {
+  const features = [
+    {
+      title: "Problem Solving",
+      description: "Master coding challenges with our curated collection of problems. From beginner to advanced, practice algorithms, data structures, and problem-solving techniques.",
+      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop",
+      icon: "💻"
+    },
+    {
+      title: "Quiz Challenges",
+      description: "Test your knowledge with interactive quizzes covering various programming concepts. Track your progress and identify areas for improvement.",
+      image: "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=600&h=400&fit=crop",
+      icon: "📝"
+    },
+    {
+      title: "Coding Contests",
+      description: "Compete with developers worldwide in real-time coding contests. Organize your own contests and challenge your peers to climb the leaderboard.",
+      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
+      icon: "🏆"
+    }
+  ];
+
+  const practiceTopics = [
+    { 
+      title: "DSA Sheets", 
+      desc: "Curated paths by experts", 
+      img: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=600", 
+      link: "/dsa-sheets" 
+    },
+    { 
+      title: "Practice DSA", 
+      desc: "Topic-wise problems", 
+      img: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600", 
+      link: "/practice-dsa" 
+    },
+    { 
+      title: "SQL Sheets", 
+      desc: "Database mastery guide", 
+      img: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=600", 
+      link: "/sql-sheets" 
+    },
+    { 
+      title: "Practice SQL", 
+      desc: "Real-world queries", 
+      img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600", 
+      link: "/practice-sql" 
+    }
+  ];
+
   return (
     <div className="home-container">
-      <div className="welcome-card">
-        <h1>Welcome, {userData?.username}!</h1>
-        <p className="subtitle">You are now logged in</p>
-        <p className="user-email">Email: {userData?.email}</p>
+      {/* Welcome Section */}
+      <div className="welcome-section">
+        <h1>Welcome back, {userData?.username || 'Coder'}!</h1>
+        <p className="welcome-subtitle">Ready to level up your coding skills?</p>
+      </div>
+
+      {/* Features Section */}
+      <div className="features-section">
+        <h2 className="features-heading">What We Offer</h2>
         
-        <div className="quick-stats">
-          <div className="stat-box">
-            <h3>0</h3>
-            <p>Problems Solved</p>
+        {features.map((feature, index) => (
+          <div 
+            key={index} 
+            className={`feature-card ${index % 2 === 1 ? 'reverse' : ''}`}
+          >
+            <div className="feature-content">
+              <div className="feature-icon">{feature.icon}</div>
+              <h3>{feature.title}</h3>
+              <p>{feature.description}</p>
+              <button className="feature-btn">
+                Get Started →
+              </button>
+            </div>
+            <div className="feature-image">
+              <img src={feature.image} alt={feature.title} />
+              <div className="image-overlay"></div>
+            </div>
           </div>
-          <div className="stat-box">
-            <h3>0</h3>
-            <p>Contests Joined</p>
-          </div>
-          <div className="stat-box">
-            <h3>0</h3>
-            <p>Quiz Attempts</p>
+        ))}
+
+        {/* Practice Hub - Wrapped in a single matching box */}
+        <h2 className="features-heading" style={{ marginTop: '80px' }}>Master Your Skills</h2>
+        
+        <div className="feature-card practice-main-card">
+          <div className="practice-grid">
+            {practiceTopics.map((topic, index) => (
+              <div 
+                key={index}
+                className="practice-box"
+                style={{ backgroundImage: `url(${topic.img})` }}
+                onClick={() => !isLoggedIn ? onLoginPrompt() : console.log("Navigate to", topic.link)}
+              >
+                <div className="box-overlay">
+                  <h4>{topic.title}</h4>
+                  <p>{topic.desc}</p>
+                  {!isLoggedIn && <span className="lock-tag">🔒 Login to Unlock</span>}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
+
       </div>
     </div>
   );
