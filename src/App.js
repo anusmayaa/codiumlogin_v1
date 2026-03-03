@@ -4,6 +4,8 @@ import Sidebar from './components/Sidebar/Sidebar';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import Home from './pages/Home/Home';
+import PracticeDSA from './pages/PracticeDSA/PracticeDSA';
+import PracticeSQL from './pages/PracticeSQL/PracticeSQL';
 import './App.css';
 
 function App() {
@@ -12,6 +14,7 @@ function App() {
   // Default to home so logout doesn't force a login screen
   const [currentPage, setCurrentPage] = useState('home');  
   const [userData, setUserData] = useState(null);
+  const [scrollToSection, setScrollToSection] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
@@ -52,6 +55,16 @@ function App() {
   const switchToLogin = () => setCurrentPage('login');
   const switchToSignup = () => setCurrentPage('signup');
   const switchToHome = () => setCurrentPage('home');
+  const switchToPracticeDSA = () => setCurrentPage('practice-dsa');
+
+  const handleNavigation = (page, section = null) => {
+    setCurrentPage(page);
+    if (section) {
+      setTimeout(() => setScrollToSection(section), 100);
+    } else {
+      setScrollToSection(null);
+    }
+  };
 
   return (
     <div className="App">
@@ -71,6 +84,7 @@ function App() {
         isLoggedIn={isLoggedIn}
         handleLogout={handleLogout}
         userData={userData}
+        onNavigate={handleNavigation}
       />
       
       <div className={`main-content ${isSidebarOpen ? 'shifted' : ''}`}>
@@ -93,13 +107,23 @@ function App() {
             1. User is logged in 
             2. OR current page is 'home' 
         */}
-        {(isLoggedIn || currentPage === 'home') && (
+        {(isLoggedIn || currentPage === 'home') && currentPage === 'home' && (
           <Home 
             userData={userData} 
             isLoggedIn={isLoggedIn} 
             onLoginPrompt={switchToLogin}
             onRegisterPrompt={switchToSignup}
+            onNavigate={setCurrentPage}
+            scrollToSection={scrollToSection}
           />
+        )}
+
+        {isLoggedIn && currentPage === 'practice-dsa' && (
+          <PracticeDSA />
+        )}
+
+        {isLoggedIn && currentPage === 'practice-sql' && (
+          <PracticeSQL />
         )}
       </div>
     </div>

@@ -1,7 +1,12 @@
 import React from 'react';
-import './Sidebar.css';
+import '../../styles/Sidebar.css';
 
-function Sidebar({ isOpen, closeSidebar, isLoggedIn, handleLogout, userData }) {
+function Sidebar({ isOpen, closeSidebar, isLoggedIn, handleLogout, userData, onNavigate }) {
+  const handleNavigation = (page, section = null) => {
+    closeSidebar();
+    onNavigate(page, section);
+  };
+
   return (
     <>
       {isOpen && <div className="overlay" onClick={closeSidebar}></div>}
@@ -13,16 +18,16 @@ function Sidebar({ isOpen, closeSidebar, isLoggedIn, handleLogout, userData }) {
         </div>
 
         <nav className="sidebar-nav">
-          <a href="#" className="sidebar-link">
+          <a href="#" className="sidebar-link" onClick={(e) => { e.preventDefault(); handleNavigation('home'); }}>
             <span>🏠</span> Home
           </a>
-          <a href="#" className="sidebar-link">
+          <a href="#" className="sidebar-link" onClick={(e) => { e.preventDefault(); handleNavigation('home', 'problems'); }}>
             <span>💻</span> Problems
           </a>
           <a href="#" className="sidebar-link">
             <span>📝</span> Quiz
           </a>
-          <a href="#" className="sidebar-link">
+          <a href="#" className="sidebar-link" onClick={(e) => { e.preventDefault(); handleNavigation('home', 'contest'); }}>
             <span>🏆</span> Contest
           </a>
           <a href="#" className="sidebar-link">

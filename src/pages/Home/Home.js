@@ -1,7 +1,27 @@
-import React from 'react';
-import './Home.css';
+import React, { useRef } from 'react';
+import '../../styles/Home.css';
 
-function Home({ userData, isLoggedIn, onLoginPrompt }) {
+function Home({ userData, isLoggedIn, onLoginPrompt, onNavigate, scrollToSection }) {
+  const problemsRef = useRef(null);
+  const contestRef = useRef(null);
+  const practiceRef = useRef(null);
+  const competeRef = useRef(null);
+
+  React.useEffect(() => {
+    if (scrollToSection === 'problems' && problemsRef.current) {
+      problemsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (scrollToSection === 'contest' && contestRef.current) {
+      contestRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [scrollToSection]);
+
+  const scrollToPractice = () => {
+    practiceRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const scrollToCompete = () => {
+    competeRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
   const features = [
     {
       title: "Problem Solving",
@@ -50,12 +70,27 @@ function Home({ userData, isLoggedIn, onLoginPrompt }) {
     }
   ];
 
+  const contestOptions = [
+    { 
+      title: "Create Contest", 
+      desc: "Host your own coding challenge", 
+      img: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600", 
+      link: "/create-contest" 
+    },
+    { 
+      title: "Join Contest", 
+      desc: "Compete with others", 
+      img: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600", 
+      link: "/join-contest" 
+    }
+  ];
+
   return (
     <div className="home-container">
       {/* Welcome Section */}
       <div className="welcome-section">
         <h1>Welcome back, {userData?.username || 'Coder'}!</h1>
-        <p className="welcome-subtitle">Ready to level up your coding skills?</p>
+        <p className="welcome-subtitle">Start coding..</p>
       </div>
 
       {/* Features Section */}
@@ -66,12 +101,19 @@ function Home({ userData, isLoggedIn, onLoginPrompt }) {
           <div 
             key={index} 
             className={`feature-card ${index % 2 === 1 ? 'reverse' : ''}`}
+            ref={feature.title === 'Problem Solving' ? problemsRef : feature.title === 'Coding Contests' ? contestRef : null}
           >
             <div className="feature-content">
               <div className="feature-icon">{feature.icon}</div>
               <h3>{feature.title}</h3>
               <p>{feature.description}</p>
-              <button className="feature-btn">
+              <button 
+                className="feature-btn"
+                onClick={() => {
+                  if (feature.title === 'Problem Solving') scrollToPractice();
+                  if (feature.title === 'Coding Contests') scrollToCompete();
+                }}
+              >
                 Get Started →
               </button>
             </div>
@@ -83,7 +125,7 @@ function Home({ userData, isLoggedIn, onLoginPrompt }) {
         ))}
 
         {/* Practice Hub - Wrapped in a single matching box */}
-        <h2 className="features-heading" style={{ marginTop: '80px' }}>Master Your Skills</h2>
+        <h2 className="features-heading" style={{ marginTop: '80px' }} ref={practiceRef}>Master Your Skills</h2>
         
         <div className="feature-card practice-main-card">
           <div className="practice-grid">
@@ -92,11 +134,43 @@ function Home({ userData, isLoggedIn, onLoginPrompt }) {
                 key={index}
                 className="practice-box"
                 style={{ backgroundImage: `url(${topic.img})` }}
-                onClick={() => !isLoggedIn ? onLoginPrompt() : console.log("Navigate to", topic.link)}
+                onClick={() => {
+                  if (!isLoggedIn) {
+                    onLoginPrompt();
+                  } else if (topic.link === '/practice-dsa') {
+                    onNavigate('practice-dsa');
+                  } else if (topic.link === '/practice-sql') {
+                    onNavigate('practice-sql');
+                  } else {
+                    console.log("Navigate to", topic.link);
+                  }
+                }}
               >
                 <div className="box-overlay">
                   <h4>{topic.title}</h4>
                   <p>{topic.desc}</p>
+                  {!isLoggedIn && <span className="lock-tag">🔒 Login to Unlock</span>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Contest Section */}
+        <h2 className="features-heading" style={{ marginTop: '80px' }} ref={competeRef}>Compete & Excel</h2>
+        
+        <div className="feature-card practice-main-card">
+          <div className="practice-grid">
+            {contestOptions.map((option, index) => (
+              <div 
+                key={index}
+                className="practice-box"
+                style={{ backgroundImage: `url(${option.img})` }}
+                onClick={() => !isLoggedIn ? onLoginPrompt() : console.log("Navigate to", option.link)}
+              >
+                <div className="box-overlay">
+                  <h4>{option.title}</h4>
+                  <p>{option.desc}</p>
                   {!isLoggedIn && <span className="lock-tag">🔒 Login to Unlock</span>}
                 </div>
               </div>
