@@ -23,7 +23,7 @@ function PracticeDSA() {
 
   const fetchProblems = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/dsa/problems');
+      const response = await fetch('http://localhost:8000/api/dsa/problems/');
       const data = await response.json();
       setProblems(data);
       setFilteredProblems(data);

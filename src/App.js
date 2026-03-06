@@ -7,6 +7,10 @@ import Home from './pages/Home/Home';
 import PracticeDSA from './pages/PracticeDSA/PracticeDSA';
 import PracticeSQL from './pages/PracticeSQL/PracticeSQL';
 import TakeQuiz from './pages/TakeQuiz/TakeQuiz';
+import Quiz from './pages/Quiz/Quiz';
+import DSASheets from './pages/DSASheets/DSASheets';
+import SQLSheets from './pages/SQLSheets/SQLSheets';
+import LearnTopic from './pages/LearnTopic/LearnTopic';
 import './App.css';
 
 function App() {
@@ -16,6 +20,8 @@ function App() {
   const [currentPage, setCurrentPage] = useState('home');  
   const [userData, setUserData] = useState(null);
   const [scrollToSection, setScrollToSection] = useState(null);
+  const [selectedQuizTopic, setSelectedQuizTopic] = useState(null);
+  const [learnTopicData, setLearnTopicData] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
@@ -60,9 +66,17 @@ function App() {
   const handleNavigation = (page, section = null) => {
     setCurrentPage(page);
     if (section) {
-      setTimeout(() => setScrollToSection(section), 100);
+      if (page === 'quiz') {
+        setSelectedQuizTopic(section);
+      } else if (page === 'learn-topic') {
+        setLearnTopicData(section);
+      } else {
+        setTimeout(() => setScrollToSection(section), 100);
+      }
     } else {
       setScrollToSection(null);
+      setSelectedQuizTopic(null);
+      setLearnTopicData(null);
     }
   };
 
@@ -127,7 +141,27 @@ function App() {
         )}
 
         {isLoggedIn && currentPage === 'take-quiz' && (
-          <TakeQuiz onNavigate={setCurrentPage} />
+          <TakeQuiz onNavigate={handleNavigation} />
+        )}
+
+        {isLoggedIn && currentPage === 'quiz' && selectedQuizTopic && (
+          <Quiz topic={selectedQuizTopic} onNavigate={setCurrentPage} />
+        )}
+
+        {isLoggedIn && currentPage === 'dsa-sheets' && (
+          <DSASheets onNavigate={handleNavigation} />
+        )}
+
+        {isLoggedIn && currentPage === 'sql-sheets' && (
+          <SQLSheets onNavigate={handleNavigation} />
+        )}
+
+        {isLoggedIn && currentPage === 'learn-topic' && learnTopicData && (
+          <LearnTopic 
+            topic={learnTopicData.topic} 
+            category={learnTopicData.category} 
+            onNavigate={setCurrentPage} 
+          />
         )}
       </div>
     </div>

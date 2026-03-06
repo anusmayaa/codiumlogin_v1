@@ -7,7 +7,7 @@ import dsaSheetsImg from '../../images/photo-1516116216624-53e697fedbea.jpeg';
 import practiceDsaImg from '../../images/photo-1504639725590-34d0984388bd.jpeg';
 import sqlSheetsImg from '../../images/photo-1544383835-bda2bc66a55d.jpeg';
 import practiceSqlImg from '../../images/photo-1460925895917-afdab827c52f.jpeg';
-import createContestImg from '../../images/photo-1552664730-d307ca884978 (1).jpeg';
+import createContestImg from '../../images/photo-1552664730-d307ca884978-1.jpeg';
 import joinContestImg from '../../images/photo-1523580494863-6f3031224c94.jpeg';
 import takeQuizImg from '../../images/photo-1434030216411-0b793f4b4173.jpeg';
 import puzzleIcon from '../../icons/puzzle.png';
@@ -175,6 +175,10 @@ function Home({ userData, isLoggedIn, onLoginPrompt, onNavigate, scrollToSection
                     onNavigate('practice-dsa');
                   } else if (topic.link === '/practice-sql') {
                     onNavigate('practice-sql');
+                  } else if (topic.link === '/dsa-sheets') {
+                    onNavigate('dsa-sheets');
+                  } else if (topic.link === '/sql-sheets') {
+                    onNavigate('sql-sheets');
                   } else {
                     console.log("Navigate to", topic.link);
                   }
