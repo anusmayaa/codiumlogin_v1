@@ -1,17 +1,35 @@
 import React, { useRef } from 'react';
 import '../../styles/Home.css';
+import problemSolvingImg from '../../images/photo-1555066931-4365d14bab8c.jpeg';
+import quizChallengesImg from '../../images/photo-1606326608606-aa0b62935f2b.jpeg';
+import codingContestsImg from '../../images/photo-1552664730-d307ca884978.jpeg';
+import dsaSheetsImg from '../../images/photo-1516116216624-53e697fedbea.jpeg';
+import practiceDsaImg from '../../images/photo-1504639725590-34d0984388bd.jpeg';
+import sqlSheetsImg from '../../images/photo-1544383835-bda2bc66a55d.jpeg';
+import practiceSqlImg from '../../images/photo-1460925895917-afdab827c52f.jpeg';
+import createContestImg from '../../images/photo-1552664730-d307ca884978 (1).jpeg';
+import joinContestImg from '../../images/photo-1523580494863-6f3031224c94.jpeg';
+import takeQuizImg from '../../images/photo-1434030216411-0b793f4b4173.jpeg';
+import puzzleIcon from '../../icons/puzzle.png';
+import quizGameIcon from '../../icons/quiz-game.png';
+import podiumIcon from '../../icons/podium.png';
 
 function Home({ userData, isLoggedIn, onLoginPrompt, onNavigate, scrollToSection }) {
   const problemsRef = useRef(null);
   const contestRef = useRef(null);
   const practiceRef = useRef(null);
   const competeRef = useRef(null);
+  const quizRef = useRef(null);
 
   React.useEffect(() => {
     if (scrollToSection === 'problems' && problemsRef.current) {
       problemsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else if (scrollToSection === 'contest' && contestRef.current) {
       contestRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (scrollToSection === 'practice' && practiceRef.current) {
+      practiceRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (scrollToSection === 'compete' && competeRef.current) {
+      competeRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }, [scrollToSection]);
 
@@ -22,24 +40,28 @@ function Home({ userData, isLoggedIn, onLoginPrompt, onNavigate, scrollToSection
   const scrollToCompete = () => {
     competeRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
+
+  const scrollToQuiz = () => {
+    quizRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
   const features = [
     {
       title: "Problem Solving",
       description: "Master coding challenges with our curated collection of problems. From beginner to advanced, practice algorithms, data structures, and problem-solving techniques.",
-      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop",
-      icon: "💻"
+      image: problemSolvingImg,
+      icon: puzzleIcon
     },
     {
       title: "Quiz Challenges",
       description: "Test your knowledge with interactive quizzes covering various programming concepts. Track your progress and identify areas for improvement.",
-      image: "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=600&h=400&fit=crop",
-      icon: "📝"
+      image: quizChallengesImg,
+      icon: quizGameIcon
     },
     {
       title: "Coding Contests",
       description: "Compete with developers worldwide in real-time coding contests. Organize your own contests and challenge your peers to climb the leaderboard.",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
-      icon: "🏆"
+      image: codingContestsImg,
+      icon: podiumIcon
     }
   ];
 
@@ -47,25 +69,25 @@ function Home({ userData, isLoggedIn, onLoginPrompt, onNavigate, scrollToSection
     { 
       title: "DSA Sheets", 
       desc: "Curated paths by experts", 
-      img: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=600", 
+      img: dsaSheetsImg, 
       link: "/dsa-sheets" 
     },
     { 
       title: "Practice DSA", 
       desc: "Topic-wise problems", 
-      img: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600", 
+      img: practiceDsaImg, 
       link: "/practice-dsa" 
     },
     { 
       title: "SQL Sheets", 
       desc: "Database mastery guide", 
-      img: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=600", 
+      img: sqlSheetsImg, 
       link: "/sql-sheets" 
     },
     { 
       title: "Practice SQL", 
       desc: "Real-world queries", 
-      img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600", 
+      img: practiceSqlImg, 
       link: "/practice-sql" 
     }
   ];
@@ -74,14 +96,23 @@ function Home({ userData, isLoggedIn, onLoginPrompt, onNavigate, scrollToSection
     { 
       title: "Create Contest", 
       desc: "Host your own coding challenge", 
-      img: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600", 
+      img: createContestImg, 
       link: "/create-contest" 
     },
     { 
       title: "Join Contest", 
       desc: "Compete with others", 
-      img: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600", 
+      img: joinContestImg, 
       link: "/join-contest" 
+    }
+  ];
+
+  const quizOptions = [
+    { 
+      title: "Take Quiz", 
+      desc: "Test your knowledge", 
+      img: takeQuizImg, 
+      link: "/take-quiz" 
     }
   ];
 
@@ -104,7 +135,9 @@ function Home({ userData, isLoggedIn, onLoginPrompt, onNavigate, scrollToSection
             ref={feature.title === 'Problem Solving' ? problemsRef : feature.title === 'Coding Contests' ? contestRef : null}
           >
             <div className="feature-content">
-              <div className="feature-icon">{feature.icon}</div>
+              <div className="feature-icon">
+                <img src={feature.icon} alt={feature.title} className="feature-icon-img" />
+              </div>
               <h3>{feature.title}</h3>
               <p>{feature.description}</p>
               <button 
@@ -112,6 +145,7 @@ function Home({ userData, isLoggedIn, onLoginPrompt, onNavigate, scrollToSection
                 onClick={() => {
                   if (feature.title === 'Problem Solving') scrollToPractice();
                   if (feature.title === 'Coding Contests') scrollToCompete();
+                  if (feature.title === 'Quiz Challenges') scrollToQuiz();
                 }}
               >
                 Get Started →
@@ -167,6 +201,36 @@ function Home({ userData, isLoggedIn, onLoginPrompt, onNavigate, scrollToSection
                 className="practice-box"
                 style={{ backgroundImage: `url(${option.img})` }}
                 onClick={() => !isLoggedIn ? onLoginPrompt() : console.log("Navigate to", option.link)}
+              >
+                <div className="box-overlay">
+                  <h4>{option.title}</h4>
+                  <p>{option.desc}</p>
+                  {!isLoggedIn && <span className="lock-tag">🔒 Login to Unlock</span>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Quiz Section */}
+        <h2 className="features-heading" style={{ marginTop: '80px' }} ref={quizRef}>Test Your Knowledge</h2>
+        
+        <div className="feature-card practice-main-card">
+          <div className="practice-grid single-item">
+            {quizOptions.map((option, index) => (
+              <div 
+                key={index}
+                className="practice-box"
+                style={{ backgroundImage: `url(${option.img})` }}
+                onClick={() => {
+                  if (!isLoggedIn) {
+                    onLoginPrompt();
+                  } else if (option.link === '/take-quiz') {
+                    onNavigate('take-quiz');
+                  } else {
+                    console.log("Navigate to", option.link);
+                  }
+                }}
               >
                 <div className="box-overlay">
                   <h4>{option.title}</h4>

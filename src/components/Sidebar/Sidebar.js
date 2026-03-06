@@ -1,5 +1,10 @@
 import React from 'react';
 import '../../styles/Sidebar.css';
+import homeIcon from '../../icons/home.png';
+import problemSolvingIcon from '../../icons/problem-solving.png';
+import quizGameIcon from '../../icons/quiz-game.png';
+import trophyIcon from '../../icons/trophy.png';
+import userIcon from '../../icons/user.png';
 
 function Sidebar({ isOpen, closeSidebar, isLoggedIn, handleLogout, userData, onNavigate }) {
   const handleNavigation = (page, section = null) => {
@@ -18,30 +23,24 @@ function Sidebar({ isOpen, closeSidebar, isLoggedIn, handleLogout, userData, onN
         </div>
 
         <nav className="sidebar-nav">
-          <a href="#" className="sidebar-link" onClick={(e) => { e.preventDefault(); handleNavigation('home'); }}>
-            <span>🏠</span> Home
-          </a>
-          <a href="#" className="sidebar-link" onClick={(e) => { e.preventDefault(); handleNavigation('home', 'problems'); }}>
-            <span>💻</span> Problems
-          </a>
-          <a href="#" className="sidebar-link">
-            <span>📝</span> Quiz
-          </a>
-          <a href="#" className="sidebar-link" onClick={(e) => { e.preventDefault(); handleNavigation('home', 'contest'); }}>
-            <span>🏆</span> Contest
-          </a>
-          <a href="#" className="sidebar-link">
-            <span>📊</span> Leaderboard
-          </a>
+          <button className="sidebar-link" onClick={(e) => { e.preventDefault(); handleNavigation('home'); }}>
+            <img src={homeIcon} alt="Home" className="sidebar-icon" /> Home
+          </button>
+          <button className="sidebar-link" onClick={(e) => { e.preventDefault(); handleNavigation('home', 'practice'); }}>
+            <img src={problemSolvingIcon} alt="Problems" className="sidebar-icon" /> Problems
+          </button>
+          <button className="sidebar-link" onClick={(e) => { e.preventDefault(); handleNavigation('take-quiz'); }}>
+            <img src={quizGameIcon} alt="Quiz" className="sidebar-icon" /> Quiz
+          </button>
+          <button className="sidebar-link" onClick={(e) => { e.preventDefault(); handleNavigation('home', 'compete'); }}>
+            <img src={trophyIcon} alt="Contest" className="sidebar-icon" /> Contest
+          </button>
           
           {isLoggedIn && (
             <>
-              <a href="#" className="sidebar-link">
-                <span>👤</span> Profile
-              </a>
-              <a href="#" className="sidebar-link">
-                <span>⚙️</span> Settings
-              </a>
+              <button className="sidebar-link">
+                <img src={userIcon} alt="Profile" className="sidebar-icon" /> Profile
+              </button>
             </>
           )}
         </nav>

@@ -4,22 +4,22 @@ import '../../styles/PracticeSQL.css';
 function PracticeSQL() {
   const [problems, setProblems] = useState([]);
   const [filteredProblems, setFilteredProblems] = useState([]);
-  const [selectedTopic, setSelectedTopic] = useState('All');
+  const [selectedDifficulty, setSelectedDifficulty] = useState('All');
   const [loading, setLoading] = useState(true);
 
-  const topics = ['All', 'SELECT', 'JOIN', 'Aggregation', 'Subqueries', 'Window Functions', 'Indexes', 'Transactions', 'Stored Procedures'];
+  const difficulties = ['All', 'Easy', 'Medium', 'Hard'];
 
   useEffect(() => {
     fetchProblems();
   }, []);
 
   useEffect(() => {
-    if (selectedTopic === 'All') {
+    if (selectedDifficulty === 'All') {
       setFilteredProblems(problems);
     } else {
-      setFilteredProblems(problems.filter(p => p.topic === selectedTopic));
+      setFilteredProblems(problems.filter(p => p.difficulty?.toLowerCase() === selectedDifficulty.toLowerCase()));
     }
-  }, [selectedTopic, problems]);
+  }, [selectedDifficulty, problems]);
 
   const fetchProblems = async () => {
     try {
@@ -52,13 +52,13 @@ function PracticeSQL() {
 
       <div className="topics-section">
         <div className="topics-filter">
-          {topics.map(topic => (
+          {difficulties.map(difficulty => (
             <button
-              key={topic}
-              className={`topic-btn ${selectedTopic === topic ? 'active' : ''}`}
-              onClick={() => setSelectedTopic(topic)}
+              key={difficulty}
+              className={`topic-btn ${selectedDifficulty === difficulty ? 'active' : ''}`}
+              onClick={() => setSelectedDifficulty(difficulty)}
             >
-              {topic}
+              {difficulty}
             </button>
           ))}
         </div>
@@ -76,7 +76,7 @@ function PracticeSQL() {
               <span className="col-action">Action</span>
             </div>
             {filteredProblems.length === 0 ? (
-              <div className="no-problems">No problems found for this topic</div>
+              <div className="no-problems">No problems found for this difficulty</div>
             ) : (
               filteredProblems.map(problem => (
                 <div key={problem._id} className="table-row">

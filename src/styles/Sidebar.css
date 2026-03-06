@@ -70,6 +70,19 @@
   text-decoration: none;
   font-weight: 600;
   transition: 0.2s;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+}
+
+.sidebar-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 
 .sidebar-link:hover {

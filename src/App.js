@@ -6,6 +6,7 @@ import Signup from './pages/Signup/Signup';
 import Home from './pages/Home/Home';
 import PracticeDSA from './pages/PracticeDSA/PracticeDSA';
 import PracticeSQL from './pages/PracticeSQL/PracticeSQL';
+import TakeQuiz from './pages/TakeQuiz/TakeQuiz';
 import './App.css';
 
 function App() {
@@ -55,7 +56,6 @@ function App() {
   const switchToLogin = () => setCurrentPage('login');
   const switchToSignup = () => setCurrentPage('signup');
   const switchToHome = () => setCurrentPage('home');
-  const switchToPracticeDSA = () => setCurrentPage('practice-dsa');
 
   const handleNavigation = (page, section = null) => {
     setCurrentPage(page);
@@ -124,6 +124,10 @@ function App() {
 
         {isLoggedIn && currentPage === 'practice-sql' && (
           <PracticeSQL />
+        )}
+
+        {isLoggedIn && currentPage === 'take-quiz' && (
+          <TakeQuiz onNavigate={setCurrentPage} />
         )}
       </div>
     </div>
