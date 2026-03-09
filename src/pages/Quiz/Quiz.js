@@ -145,6 +145,9 @@ function Quiz({ topic, onNavigate }) {
   return (
     <div className="quiz-container">
       <div className="quiz-header">
+        <button className="quiz-back-btn" onClick={() => onNavigate('take-quiz')}>
+          ← Back
+        </button>
         <h2>{topic} Quiz</h2>
         <div className="progress-info">
           <div className="progress-bar">

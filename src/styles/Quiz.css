@@ -19,6 +19,26 @@
 .quiz-header {
   max-width: 800px;
   margin: 0 auto 40px;
+  position: relative;
+}
+
+.quiz-back-btn {
+  padding: 8px 16px;
+  background-color: transparent;
+  color: #666;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+}
+
+.quiz-back-btn:hover {
+  border-color: #22c55e;
+  color: #22c55e;
 }
 
 .quiz-header h2 {
@@ -272,6 +292,16 @@
 body.dark .quiz-container,
 body.dark .quiz-results-container {
   background-color: #0a0e1a;
+}
+
+body.dark .quiz-back-btn {
+  color: #9ca3af;
+  border-color: #374151;
+}
+
+body.dark .quiz-back-btn:hover {
+  border-color: #10b981;
+  color: #10b981;
 }
 
 body.dark .quiz-header h2,
