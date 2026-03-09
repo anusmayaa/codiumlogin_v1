@@ -146,15 +146,17 @@ function Quiz({ topic, onNavigate }) {
     <div className="quiz-container">
       <div className="quiz-header">
         <h2>{topic} Quiz</h2>
-        <div className="progress-bar">
-          <div 
-            className="progress-fill" 
-            style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
-          ></div>
+        <div className="progress-info">
+          <div className="progress-bar">
+            <div 
+              className="progress-fill" 
+              style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+            ></div>
+          </div>
+          <p className="question-counter">
+            Question {currentQuestion + 1} of {questions.length}
+          </p>
         </div>
-        <p className="question-counter">
-          Question {currentQuestion + 1} of {questions.length}
-        </p>
       </div>
 
       <div className="question-card">

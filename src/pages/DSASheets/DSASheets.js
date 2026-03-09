@@ -1,42 +1,49 @@
 import React from 'react';
 import '../../styles/DSASheets.css';
+import arraysImg from '../../images/photo-1516116216624-53e697fedbea.jpeg';
+import stringsImg from '../../images/photo-1504639725590-34d0984388bd.jpeg';
+import stackImg from '../../images/photo-1555066931-4365d14bab8c.jpeg';
+import queueImg from '../../images/photo-1544383835-bda2bc66a55d.jpeg';
+import linkedListsImg from '../../images/photo-1460925895917-afdab827c52f.jpeg';
+import treesImg from '../../images/photo-1552664730-d307ca884978.jpeg';
+import graphsImg from '../../images/photo-1606326608606-aa0b62935f2b.jpeg';
 
 function DSASheets({ onNavigate }) {
   const dsaTopics = [
     { 
       title: "Arrays", 
       desc: "Learn array operations and algorithms", 
-      img: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=600"
+      img: arraysImg
     },
     { 
       title: "Strings", 
       desc: "Master string manipulation techniques", 
-      img: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600"
+      img: stringsImg
     },
     { 
       title: "Stack", 
       desc: "Understand stack data structure", 
-      img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600"
+      img: stackImg
     },
     { 
       title: "Queue", 
       desc: "Explore queue operations", 
-      img: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=600"
+      img: queueImg
     },
     { 
       title: "Linked Lists", 
       desc: "Deep dive into linked lists", 
-      img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600"
+      img: linkedListsImg
     },
     { 
       title: "Trees", 
       desc: "Learn tree traversals and operations", 
-      img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600"
+      img: treesImg
     },
     { 
       title: "Graphs", 
       desc: "Master graph algorithms", 
-      img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600"
+      img: graphsImg
     }
   ];
 

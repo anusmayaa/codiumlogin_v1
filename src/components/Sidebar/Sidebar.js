@@ -38,7 +38,7 @@ function Sidebar({ isOpen, closeSidebar, isLoggedIn, handleLogout, userData, onN
           
           {isLoggedIn && (
             <>
-              <button className="sidebar-link">
+              <button className="sidebar-link" onClick={(e) => { e.preventDefault(); handleNavigation('profile'); }}>
                 <img src={userIcon} alt="Profile" className="sidebar-icon" /> Profile
               </button>
             </>

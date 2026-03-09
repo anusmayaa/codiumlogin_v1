@@ -11,6 +11,7 @@ import Quiz from './pages/Quiz/Quiz';
 import DSASheets from './pages/DSASheets/DSASheets';
 import SQLSheets from './pages/SQLSheets/SQLSheets';
 import LearnTopic from './pages/LearnTopic/LearnTopic';
+import Profile from './pages/Profile/Profile';
 import './App.css';
 
 function App() {
@@ -162,6 +163,10 @@ function App() {
             category={learnTopicData.category} 
             onNavigate={setCurrentPage} 
           />
+        )}
+
+        {isLoggedIn && currentPage === 'profile' && (
+          <Profile userData={userData} />
         )}
       </div>
     </div>
