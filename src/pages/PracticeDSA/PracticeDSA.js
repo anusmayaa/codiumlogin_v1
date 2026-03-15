@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/PracticeDSA.css';
 
-function PracticeDSA() {
+function PracticeDSA({ onNavigate }) {
   const [problems, setProblems] = useState([]);
   const [filteredProblems, setFilteredProblems] = useState([]);
   const [selectedTopic, setSelectedTopic] = useState('All');
@@ -21,6 +21,18 @@ function PracticeDSA() {
     }
   }, [selectedTopic, problems]);
 
+  const dummyProblems = [
+    {
+      _id: '1', title: 'Two Sum', topic: 'Arrays', difficulty: 'Easy',
+      description: 'Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice.',
+      examples: [
+        { input: 'nums = [2,7,11,15], target = 9', output: '[0,1]', explanation: 'nums[0] + nums[1] = 2 + 7 = 9' },
+        { input: 'nums = [3,2,4], target = 6', output: '[1,2]' },
+      ],
+      constraints: ['2 <= nums.length <= 10^4', '-10^9 <= nums[i] <= 10^9', 'Only one valid answer exists.'],
+    },
+  ];
+
   const fetchProblems = async () => {
     try {
       const response = await fetch('http://localhost:8000/api/dsa/problems/');
@@ -28,7 +40,8 @@ function PracticeDSA() {
       setProblems(data);
       setFilteredProblems(data);
     } catch (error) {
-      console.error('Error fetching problems:', error);
+      setProblems(dummyProblems);
+      setFilteredProblems(dummyProblems);
     } finally {
       setLoading(false);
     }
@@ -88,7 +101,7 @@ function PracticeDSA() {
                   >
                     {problem.difficulty}
                   </span>
-                  <button className="solve-btn">Solve</button>
+                  <button className="solve-btn" onClick={() => onNavigate('problem-solve', problem)}>Solve</button>
                 </div>
               ))
             )}

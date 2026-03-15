@@ -12,6 +12,7 @@ import DSASheets from './pages/DSASheets/DSASheets';
 import SQLSheets from './pages/SQLSheets/SQLSheets';
 import LearnTopic from './pages/LearnTopic/LearnTopic';
 import Profile from './pages/Profile/Profile';
+import ProblemSolve from './pages/ProblemSolve/ProblemSolve';
 import './App.css';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
   const [scrollToSection, setScrollToSection] = useState(null);
   const [selectedQuizTopic, setSelectedQuizTopic] = useState(null);
   const [learnTopicData, setLearnTopicData] = useState(null);
+  const [selectedProblem, setSelectedProblem] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
@@ -71,6 +73,8 @@ function App() {
         setSelectedQuizTopic(section);
       } else if (page === 'learn-topic') {
         setLearnTopicData(section);
+      } else if (page === 'problem-solve') {
+        setSelectedProblem(section);
       } else {
         setTimeout(() => setScrollToSection(section), 100);
       }
@@ -134,7 +138,11 @@ function App() {
         )}
 
         {isLoggedIn && currentPage === 'practice-dsa' && (
-          <PracticeDSA />
+          <PracticeDSA onNavigate={handleNavigation} />
+        )}
+
+        {isLoggedIn && currentPage === 'problem-solve' && (
+          <ProblemSolve problem={selectedProblem} onNavigate={handleNavigation} />
         )}
 
         {isLoggedIn && currentPage === 'practice-sql' && (
