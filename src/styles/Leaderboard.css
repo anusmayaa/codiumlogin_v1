@@ -1,0 +1,321 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+.lb-container {
+  min-height: calc(100vh - 60px);
+  background-color: #ffffff;
+  padding: 40px 20px;
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.lb-header {
+  max-width: 1000px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.lb-header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0 0 12px;
+}
+
+.lb-header p {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 0;
+}
+
+/* Legend */
+.lb-legend {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto 24px;
+  flex-wrap: wrap;
+}
+
+.lb-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.lb-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.lb-legend-item.easy .lb-legend-dot   { background-color: #22c55e; }
+.lb-legend-item.medium .lb-legend-dot { background-color: #f59e0b; }
+.lb-legend-item.hard .lb-legend-dot   { background-color: #ef4444; }
+
+/* User Card */
+.lb-user-card {
+  max-width: 1000px;
+  margin: 0 auto 28px;
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  border-radius: 16px;
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 4px 20px rgba(34, 197, 94, 0.3);
+}
+
+.lb-user-card-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  border: 3px solid rgba(255,255,255,0.5);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.lb-user-card-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lb-user-card-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.lb-user-card-stats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.lb-user-card-stats .lb-badge.easy   { background: rgba(255,255,255,0.15); color: #fff; }
+.lb-user-card-stats .lb-badge.medium { background: rgba(255,255,255,0.15); color: #fff; }
+.lb-user-card-stats .lb-badge.hard   { background: rgba(255,255,255,0.15); color: #fff; }
+
+.lb-user-card-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.lb-user-card-points {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+
+.lb-user-card-points span {
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.lb-user-card-rank {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.75);
+  margin-top: 4px;
+}
+
+body.dark .lb-user-card {
+  box-shadow: 0 4px 30px rgba(34, 197, 94, 0.2);
+}
+
+/* User Banner (remove old) */
+.lb-table-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.lb-table {
+  background-color: #e8e8e8;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.lb-row {
+  display: grid;
+  grid-template-columns: 80px 2fr 80px 80px 80px 1.5fr 120px;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 28px;
+  border-bottom: 1px solid #d1d5db;
+  transition: all 0.2s;
+}
+
+.lb-row:last-child { border-bottom: none; }
+
+.lb-head {
+  background-color: #d1d5db;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: #374151;
+  border-bottom: 2px solid #9ca3af;
+}
+
+.lb-row:not(.lb-head):hover {
+  background-color: #f3f4f6;
+  transform: translateX(4px);
+}
+
+.lb-row-highlight {
+  background-color: #f0fdf4 !important;
+  border-left: 4px solid #22c55e;
+}
+
+/* Rank Badge */
+.lb-col-rank { text-align: center; }
+
+.lb-rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.9rem;
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+/* User col */
+.lb-col-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lb-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.lb-username {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lb-you-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  background-color: #22c55e;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+/* Solved cols */
+.lb-col-solved { text-align: center; }
+
+.lb-badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.lb-badge.easy   { background-color: #dcfce7; color: #166534; }
+.lb-badge.medium { background-color: #fef3c7; color: #92400e; }
+.lb-badge.hard   { background-color: #fee2e2; color: #991b1b; }
+
+/* Breakdown */
+.lb-col-breakdown {
+  font-size: 0.82rem;
+  color: #6b7280;
+  font-family: monospace;
+}
+
+/* Points */
+.lb-col-points {
+  text-align: right;
+  font-size: 1rem;
+  color: #1a1a1a;
+}
+
+.lb-col-points strong {
+  color: #22c55e;
+  font-size: 1.1rem;
+}
+
+.lb-loading {
+  text-align: center;
+  padding: 80px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #666;
+}
+
+/* Dark Mode */
+body.dark .lb-container { background-color: #0a0e1a; }
+body.dark .lb-header h1 { color: #e5e7eb; }
+body.dark .lb-header p  { color: #9ca3af; }
+body.dark .lb-legend-item { color: #9ca3af; }
+
+body.dark .lb-table {
+  background-color: #1a1f35;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+}
+
+body.dark .lb-head {
+  background-color: #0f1420;
+  color: #9ca3af;
+  border-bottom-color: #374151;
+}
+
+body.dark .lb-row { border-bottom-color: #1f2937; }
+body.dark .lb-row:not(.lb-head):hover { background-color: #252b42; }
+body.dark .lb-row-highlight { background-color: #052e16 !important; }
+body.dark .lb-row-top:not(.lb-head) {
+  background-color: #1a1f35;
+}
+
+body.dark .lb-rank-badge { background-color: #1f2937; color: #9ca3af; }
+body.dark .lb-username { color: #e5e7eb; }
+body.dark .lb-col-breakdown { color: #6b7280; }
+body.dark .lb-col-points { color: #e5e7eb; }
+
+body.dark .lb-badge.easy   { background-color: #064e3b; color: #6ee7b7; }
+body.dark .lb-badge.medium { background-color: #451a03; color: #fcd34d; }
+body.dark .lb-badge.hard   { background-color: #450a0a; color: #fca5a5; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .lb-row {
+    grid-template-columns: 50px 1fr 60px 60px 60px;
+    gap: 8px;
+    padding: 14px 16px;
+  }
+  .lb-col-breakdown { display: none; }
+  .lb-header h1 { font-size: 2rem; }
+}

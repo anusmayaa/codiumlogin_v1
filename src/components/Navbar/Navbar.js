@@ -7,7 +7,9 @@ function Navbar({
   userData, 
   currentPage, // Added this prop from App.js
   onLoginClick, 
-  onRegisterClick 
+  onRegisterClick,
+  onLogoClick,
+  onNavigate 
 }) {
   const [theme, setTheme] = useState('light');
 
@@ -38,7 +40,7 @@ function Navbar({
         </button>
 
         {/* Center: Logo */}
-        <div className="navbar-logo" style={{ cursor: 'pointer' }}>
+        <div className="navbar-logo" style={{ cursor: 'pointer' }} onClick={onLogoClick}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M7 8L3 11.6923L7 16M17 8L21 11.6923L17 16M14 4L10 20" 
                   stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -63,7 +65,7 @@ function Navbar({
 
           {/* 2. User Profile (Only if logged in) */}
           {isLoggedIn && (
-            <div className="user-profile">
+            <div className="user-profile" style={{ cursor: 'pointer' }} onClick={() => onNavigate('profile')}>
               <span className="nav-username">{userData?.username}</span>
               <div className="user-icon-circle">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

@@ -10,9 +10,31 @@ import practiceSqlImg from '../../images/photo-1460925895917-afdab827c52f.jpeg';
 import createContestImg from '../../images/photo-1552664730-d307ca884978-1.jpeg';
 import joinContestImg from '../../images/photo-1523580494863-6f3031224c94.jpeg';
 import takeQuizImg from '../../images/photo-1434030216411-0b793f4b4173.jpeg';
-import puzzleIcon from '../../icons/puzzle.png';
-import quizGameIcon from '../../icons/quiz-game.png';
-import podiumIcon from '../../icons/podium.png';
+
+const PuzzleIcon = () => (
+  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="4 17 10 11 4 5"/>
+    <line x1="12" y1="19" x2="20" y2="19"/>
+  </svg>
+);
+
+const QuizIcon = () => (
+  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 11l3 3L22 4"/>
+    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+  </svg>
+);
+
+const ContestIcon = () => (
+  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+    <path d="M4 22h16"/>
+    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+    <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/>
+  </svg>
+);
 
 function Home({ userData, isLoggedIn, onLoginPrompt, onNavigate, scrollToSection }) {
   const problemsRef = useRef(null);
@@ -49,19 +71,19 @@ function Home({ userData, isLoggedIn, onLoginPrompt, onNavigate, scrollToSection
       title: "Problem Solving",
       description: "Master coding challenges with our curated collection of problems. From beginner to advanced, practice algorithms, data structures, and problem-solving techniques.",
       image: problemSolvingImg,
-      icon: puzzleIcon
+      icon: <PuzzleIcon />
     },
     {
       title: "Quiz Challenges",
       description: "Test your knowledge with interactive quizzes covering various programming concepts. Track your progress and identify areas for improvement.",
       image: quizChallengesImg,
-      icon: quizGameIcon
+      icon: <QuizIcon />
     },
     {
       title: "Coding Contests",
       description: "Compete with developers worldwide in real-time coding contests. Organize your own contests and challenge your peers to climb the leaderboard.",
       image: codingContestsImg,
-      icon: podiumIcon
+      icon: <ContestIcon />
     }
   ];
 
@@ -136,7 +158,7 @@ function Home({ userData, isLoggedIn, onLoginPrompt, onNavigate, scrollToSection
           >
             <div className="feature-content">
               <div className="feature-icon">
-                <img src={feature.icon} alt={feature.title} className="feature-icon-img" />
+                {feature.icon}
               </div>
               <h3>{feature.title}</h3>
               <p>{feature.description}</p>

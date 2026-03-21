@@ -13,6 +13,7 @@ import SQLSheets from './pages/SQLSheets/SQLSheets';
 import LearnTopic from './pages/LearnTopic/LearnTopic';
 import Profile from './pages/Profile/Profile';
 import ProblemSolve from './pages/ProblemSolve/ProblemSolve';
+import Leaderboard from './pages/Leaderboard/Leaderboard';
 import './App.css';
 
 function App() {
@@ -95,6 +96,7 @@ function App() {
         onLoginClick={switchToLogin}
         onRegisterClick={switchToSignup}
         onLogoClick={switchToHome}
+        onNavigate={handleNavigation}
       />
       
       <Sidebar 
@@ -175,6 +177,10 @@ function App() {
 
         {isLoggedIn && currentPage === 'profile' && (
           <Profile userData={userData} />
+        )}
+
+        {isLoggedIn && currentPage === 'leaderboard' && (
+          <Leaderboard userData={userData} />
         )}
       </div>
     </div>
